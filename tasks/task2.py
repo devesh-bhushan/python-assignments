@@ -28,26 +28,36 @@ while ch == 1:
             print()
 
     elif choice == 2:
-        seat = int(input("Enter the seat number you want to book"))
-        if (seat <= 50) and (dic[seat] != "B"):
-            dic[seat] = "B"                                                   # function to book seats
-            print("Your Seat Has Been Booked")
-        elif (seat <= 50) and (dic[seat] == "B"):
-            print("seat already occupied")
-        else:
-            print("Invalid Seat Number")
+        lst = []
+        no_seat = int(input("enter the number of seats you want to book"))
+        for i in range(no_seat):
+            seat = int(input("Enter the seat number you want to book"))
+            lst.append(seat)
+        for i in lst:
+            if (i <= 50) and (dic[i] != "B"):
+                dic[i] = "B"                                                   # function to book seats
+                print(f"Your Seat number-{i}- Has Been Booked")
+            elif (i <= 50) and (dic[i] == "B"):
+                print("seat already occupied")
+            else:
+                print("Invalid Seat Number")
     elif choice == 3:
-        seatdel = int(input("Enter the seat number you want to delete book"))
-        if (seatdel <= 50) and (dic[seatdel] == "B"):
-            dic[seatdel] = seatdel                                                     # to delete seats
-            print("Your Seat Has Been deleted")
-        elif (seatdel <= 50) and (dic[seatdel] != "B"):
-            print("seat is not initially booked")
-        else:
-            print("Invalid Seat Number")
+        lst2 = []
+        no_seatdel = int(input("Enter the number of seat you want to delete"))
+        for i in range(no_seatdel):
+            seatdel = int(input("Enter the seat number you want to delete book"))
+            lst2.append(seatdel)
+        for i in lst2:
+            if (i <= 50) and (dic[i] == "B"):
+                dic[i] = i                                                     # to delete seats
+                print("Your Seat Has Been deleted")
+            elif (i <= 50) and (dic[i] != "B"):
+                print("seat is not initially booked")
+            else:
+                print("Invalid Seat Number")
     else:
         print("Invalid choice")
     print()
     ch = int(input("""                 Do You Want To Continue
-                            Press 1: To Continue
+                            Press 1: To Main Menu
                             Press 2: To Exit"""))
