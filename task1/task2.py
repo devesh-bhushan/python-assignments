@@ -1,0 +1,53 @@
+"""
+this is a menu driven ticket booking system
+"""
+dic = {}
+for key in range(1, 51):
+    dic[key] = key
+ch = 1
+while ch == 1:
+    print("""
+    **********************               Welcome To The Ticket Centre          **********************
+                          Press : 1 To See Available Seats
+                          Press 2 : To Book Seats
+                          Press 3 : To Cancel Seat""")
+    choice = int(input("Please Enter Your Choice"))
+    if choice == 1:
+        key = 1                                           # function to see available seats
+        for i in range(5):
+            for j in range(10):
+                if key <= 10:                              # applied formatting
+                    print(dic[key], end="                ")
+                    key = key + 1
+                elif dic[key] == "B":
+                    print(dic[key], end="                ")
+                    key = key + 1
+                else:
+                    print(dic[key], end="               ")
+                    key = key + 1
+            print()
+
+    elif choice == 2:
+        seat = int(input("Enter the seat number you want to book"))
+        if (seat <= 50) and (dic[seat] != "B"):
+            dic[seat] = "B"                                                   # function to book seats
+            print("Your Seat Has Been Booked")
+        elif (seat <= 50) and (dic[seat] == "B"):
+            print("seat already occupied")
+        else:
+            print("Invalid Seat Number")
+    elif choice == 3:
+        seatdel = int(input("Enter the seat number you want to delete book"))
+        if (seatdel <= 50) and (dic[seatdel] == "B"):
+            dic[seatdel] = seatdel                                                     # to delete seats
+            print("Your Seat Has Been deleted")
+        elif (seatdel <= 50) and (dic[seatdel] != "B"):
+            print("seat is not initially booked")
+        else:
+            print("Invalid Seat Number")
+    else:
+        print("Invalid choice")
+    print()
+    ch = int(input("""                 Do You Want To Continue
+                            Press 1: To Continue
+                            Press 2: To Exit"""))
