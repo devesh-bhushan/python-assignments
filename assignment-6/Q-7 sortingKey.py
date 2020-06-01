@@ -10,5 +10,4 @@ for i in range(nu):
 print("the entered dictionary is", dic)
 print("the dictionary in sorted order is")
 for i in sorted(dic):
-    c = dic.keys()
     print(f"{i} - {dic[i]}", end="\n")

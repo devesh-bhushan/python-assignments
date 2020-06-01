@@ -1,5 +1,5 @@
 """"
-this is a program to calculate area of square
+this is a program to calculate area of  rectangle
 """
 len = eval(input("enter the dimensions of length "))    # input length
 brd = eval(input("enter the dimensions of breadth"))    # input breadth

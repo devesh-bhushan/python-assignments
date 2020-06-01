@@ -7,7 +7,7 @@ num = int(input("enter the  nth natural number "))
 def printer(n):
     a = 1
     while n != 0:
-        print( a, end="--")
+        print(a, end="--")
         a += 1
         n -= 1
 

@@ -1,5 +1,5 @@
 """
-program to print the star pattern
+program to print the RIGHT ANGLE TRIANGLE
 """
 for i in range(8):
     for k in range(8-(i+1)):

@@ -19,4 +19,4 @@ for i in lst:
         print("key exists in dictionary")
         break
 else:
-    print("key does not exixts in dictionary")
+    print("key does not exiSts in dictionary")
