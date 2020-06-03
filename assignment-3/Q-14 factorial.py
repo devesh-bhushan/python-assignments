@@ -12,9 +12,9 @@ def factorial(n):                          # function to calculate factorial
             n = n-1
         print("the value of factorial of given number is", fact)
     elif n < 0:
-       print("no factorial")
+        print("no factorial")
     else:
-       print("factorial is 1")
+        print("factorial is 1")
 
 
 factorial(nu1)                      # calling of function
