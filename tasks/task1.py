@@ -29,7 +29,7 @@ while ch == 1:
                     break
     elif choice == 4:
         up = list([])
-        update = int(input("enter the Employee id whose record to be deleted"))
+        update = int(input("enter the Employee id whose record to be updated"))
         for i in range(2):
             data = eval(input("enter the new employee ID and Name"))
             up.append(data)

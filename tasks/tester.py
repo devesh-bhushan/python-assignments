@@ -16,24 +16,42 @@ for i in lst:
     size = len(i)
     lst1.append(size)
 print(lst1)
+import area
+area.triangle(2,2)
+area.circle(34)
+area.cube(32)
+area.cylinder(34,56)
+import strutility as st
+st.concat("devesf","bhushan")
+st.length("devesf","bhushan")
+st.upperlowerpro("devesf","bhushan")
+
+
+
+
+import packages
+import packages.mdiv as md
+md.division(12,8)
 """
-def deco(fibo):
-    d = {}
-    def logic(n):
-        if n not in d:
-            d[n] = fibo(n)
-        return d[n]
-    return logic
 
-@ deco
-def fibo(n):
-    if n == 1 or n == 0:
-        return n
+while True:
+    try:
+        fp = open("C:\\Python38\\prog\\msg.txt", 'a')
+        num1 = int(input("enter the first number "))
+        num2 = int(input("enter the second number "))
+        res = num1//num2
+        fp.write(f"{num1}//{num2} = {res}" + "\n")
+    except ZeroDivisionError as ob:
+        fp.write(str(ob) + "\n")
+    except ValueError as ob1:
+        fp.write(str(ob1) + "\n")
     else:
-        return fibo(n-1) + fibo(n-2)
+        break
+    finally:
+        fp.close()
+print("values stored in the file are")
+fp = open("C:\\Python38\\prog\\msg.txt", 'r')
+for i in fp:
+    print(i, end="\n")
+fp.close()
 
-res = fibo
-
-n = int(input("enter the number whose factorial is to be calculated"))
-for i in range(n):
-    print(res(i), end="\n")
