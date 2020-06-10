@@ -1,3 +1,7 @@
+"""
+this a menu driven  python program to add ,display
+search ,delete ,update a employee management system
+"""
 ch = 1
 lst = list([])
 while ch == 1:
