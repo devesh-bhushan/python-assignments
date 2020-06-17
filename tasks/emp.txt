@@ -94,6 +94,4 @@ EmployeeId,FirstName,LastName,Email,Phone,Hire_Date,Job_Id,Salary,Commission_Pct
 206,William,Gietz,WGIETZ,515.123.8181,1994-06-07,AC_ACCOUNT,8300.00,NULL,205,110
 302,_Paul,Jones,JONES,9282728122,1993-02-12,IT_PROG,20000.00,0.20,100,110
 303,santosh,kumar,san@gmail.com,2929292929,2012-12-12,IT_PROG,4000,.6,100,60,
-400,kuldeep,gusain,kuldeep@gmai.com,7262626262,2001-12-12,IT_PROG,2000,.8,100,70,
 500,kuldeep,gusain,kuldeep.gmail.com,9717828334,19-06-2012,trainer,39,0.0,100,100
-001,devesh,bhushan,deepu@gmail.com,8957770436,12-12-12,145,7896541230,7418,78_78,1233

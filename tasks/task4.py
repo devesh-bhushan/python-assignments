@@ -5,34 +5,18 @@ search ,delete ,update a employee management system using file handling
 
 
 def insert(n):                             # function to insert record
-    fp = open("emp.txt", "a+")
-    for i in range(n):
-        empid = str(input("enter the EmployeeId "))
-        fn = str(input("enter the firstName "))
-        ln = str(input("enter the lastName "))
-        ema = str(input("enter the email "))
-        pho = str(input("enter the phone "))
-        hire_date = str(input("enter the hire_date "))
-        jd = str(input("enter the job_id "))
-        sal = str(input("enter the salary "))
-        commi = str(input("enter the commission_Pct "))
-        manag = str(input("enter the Manager_Id "))
-        depart = str(input("enter the Department_ID "))
-        st = ","
-        st1 = ""
-        st2 = "\n"
-        fp.write(st1 + empid + st)
-        fp.write(fn + st)
-        fp.write(ln + st)
-        fp.write(ema + st)
-        fp.write(pho + st)
-        fp.write(hire_date + st)
-        fp.write(jd + st)
-        fp.write(sal + st)
-        fp.write(commi + st)
-        fp.write(manag + st)
-        fp.write(depart + st2)
-    fp.close()
+    for j in range(n):
+        lst = ["EmployeeId", "firstName", "lastName", "email", "phone no",
+               "hire_date", "commission_Pct", "Manager_Id", "Department_ID"]
+        fp = open("emp.txt", "a+")
+        res = []
+        for i in lst:
+            data = str(input("enter the " + i))
+            res.append(data)
+        ru = ",".join(res)
+        ru = ru + "\n"
+        fp.write(ru)
+        fp.close()
 
 
 def display():                                 # function to display record
