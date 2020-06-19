@@ -6,7 +6,7 @@ import pymysql
 obj = pymysql.connect("localhost", "root", "", "pencore")
 
 
-def createprospacc():
+def createprospacc():                                   # function to add p new rospect
     cur = obj.cursor()
     try:
         prospid = 0
@@ -15,15 +15,15 @@ def createprospacc():
         prospadd = input("Enter the Prospect Address :-")
         inmod = input("Enter the Model interested in :-")
         incol = input("Enter the Model Color :-")
-        dov = input("Enter the date of visit :-")
-        dayvisit = input("Enter the day of visit :-")
-        ba = int(input("Enter the booking amount :-"))
-        gen = input("Enter the gender as :m for Male / f for Female :-")
-        ig = input("Enter the income group as : l for Low / m For Medium / h For High :-")
-        prior = input("Enter the priority as : low / medium / high :-")
-        purmod = input("Enter the purchase mode :-")
+        dov = input("Enter the Date of Visit In Format yy-mm-dd :-")
+        dayvisit = input("Enter the Day of Visit :-")
+        ba = int(input("Enter the Booking Amount :-"))
+        gen = input("Enter the Gender as :m for Male / f for Female :-")
+        ig = input("Enter the Income Group as : l for Low / m For Medium / h For High :-")
+        prior = input("Enter the Priority as : low / medium / high :-")
+        purmod = input("Enter the Purchase Mode :-")
         qry = """insert into prospect
-             values( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                  values( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
              """
         cur.execute(qry, (prospid, prospnme, prospphone, prospadd, inmod, incol, dov,
                           dayvisit, ba, gen, ig, prior, purmod))
@@ -33,12 +33,12 @@ def createprospacc():
         print(ob)
 
 
-def updateprosp(prospid):
+def updateprosp(prospid):                                     # function to update the prospect account
     cur = obj.cursor()
-    phone = input("enter the new prospect contact number")
-    im = input("Enter the new interested model")
-    ic = input("Enter the new interested color")
-    pri = input("Enter the priority")
+    phone = input("enter the New prospect's contact number :-")
+    im = input("Enter the New Interested Model in :-")
+    ic = input("Enter the New Interested Color in :-")
+    pri = input("Enter the Priority :-")
     qry = """update prospect
              set prospPhone = %s,interestedModel = %s, interestedColor = %s,priority = %s where prospId = %s
              """
@@ -47,24 +47,23 @@ def updateprosp(prospid):
     cur.close()
 
 
-def insertdetail():
+def insertdetail():                                  # function to insert the  sold car details
     cur = obj.cursor()
     try:
-        proid = int(input('Enter the nprospect id'))
-        regid = input("ENter the registration id")
-        sd = input("Enter the sale date in yy-mm-dd format")
-        price = input("Enter the car price")
-        feedbck = input("Enter the Feedback from customer")
+        proid = int(input('Enter the Prospect id :-'))
+        regid = input("Enter the Registration id :-")
+        sd = input("Enter the Sale Date in yy-mm-dd format :-")
+        modelid = input("enter the Model Name")
         qry = """insert into carsale
-                  values(%s, %s, %s, %s, %s)"""
-        cur.execute(qry, (proid, regid, sd, price, feedbck))
+                 values(%s, %s, %s, %s)"""
+        cur.execute(qry, (proid, regid, sd, modelid))
         obj.commit()
         cur.close()
     except pymysql.err.IntegrityError as ob:
         print(ob)
 
 
-def viewmodel():
+def viewmodel():                                             # function to view available car model
     cur = obj.cursor()
     qry = "select * from carModels"
     cur.execute(qry)
@@ -76,8 +75,9 @@ def viewmodel():
                 print(element, end="               ")
             print()
     else:
-        print("No Model inserted in database")
+        print("No Model Inserted in database")
     cur.close()
+
 
 if __name__ == "__main__":
     createprospacc()

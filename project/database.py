@@ -14,7 +14,7 @@ def create_emplo():                        # function to create the table
                                      gender varchar(1),
                                      phone varchar(10),
                                      email varchar(50),
-                                     status varchar(10)
+                                     status varchar(12)
                                      ) engine = Innodb;
      """
     cur.execute(qry)

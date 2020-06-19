@@ -39,11 +39,11 @@ def adminmenu(username):
                 print("Invalid option")
 
         elif choice == 2:
-            qry.viewuser()
+            qry.viewusr()
             input("Press any key to continue :-")
 
         elif choice == 3:
-            qry.viewprospect()
+            qry.viewprosp()
             input("Press any key to continue :-")
 
         elif choice == 4:

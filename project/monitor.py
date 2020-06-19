@@ -4,6 +4,7 @@ this is the monitor module
 import mainpage as mp
 import mqry
 import qry
+import ploting as pl
 
 
 def monitormenu(username):
@@ -17,24 +18,24 @@ def monitormenu(username):
                                  a) Phone b) Model c) Color d) Priority
                         Press 4: To Search Prospect
                                   a)By Priority    b)Prospect Id
-                        Press 5: To change own password
-                        Press 6: To insert car sale details
+                        Press 5: To Change own password
+                        Press 6: To Insert car sale details
                         Press 7: TO See the Available Models
                         Press 8: For Data Visualization
-                        Press 9: To Signout """)
+                        Press 9: To Logout """)
 
-        choice = int(input("please enter your choice"))
+        choice = int(input("Please enter your choice :-"))
 
         if choice == 1:
             mqry.createprospacc()
             input("Press any key to continue :-")
 
         elif choice == 2:
-            qry.viewprospect()
+            qry.viewprosp()
             input("Press any key to continue :-")
 
         elif choice == 3:
-            prospid = int(input("enter the prospect id :-"))
+            prospid = int(input("Enter the Prospect id :-"))
             mqry.updateprosp(prospid)
             input("Press any key to continue :-")
 
@@ -54,6 +55,7 @@ def monitormenu(username):
             mqry.viewmodel()
 
         elif choice == 8:
+            pl.visualization()
             input("Press any key to continue :-")
 
         elif choice == 9:
@@ -65,5 +67,5 @@ def monitormenu(username):
             input("Press any key to continue :-")
 
         con = int(input(""" 
-                            Press 1: To continue in monitor menu 
-                            Press 2: To exit from monitor menu\n"""))
+                            Press 1: To continue in Monitor Menu 
+                            Press 2: To exit from Monitor Menu\n"""))

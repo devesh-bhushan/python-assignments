@@ -5,14 +5,15 @@ import pymysql
 import admin
 import monitor
 import mainpage as mp
+import pandas as pd
 
 obj = pymysql.connect("localhost", "root", "", "pencore")
 
 
-def login():  # function for login
+def login():                                                         # function for login
     cur = obj.cursor()
-    username = input("enter the username")
-    password = input("enter the password")
+    username = input("Enter the Username :-")
+    password = input("Enter the Password :-")
     qry = f"""select usertype,fullname
              from employee
              where userName='{username}' and userPass ='{password}' and status='activated'"""
@@ -26,20 +27,20 @@ def login():  # function for login
             monitor.monitormenu(username)
 
     else:
-        print("invalid username or password")
+        print("Invalid Username or Password")
         return mp.main()
 
 
-def createuseracc(dsgn):  # function to create employee or admin account
+def createuseracc(dsgn):                                       # function to create employee or admin account
     cur = obj.cursor()
-    usrnme = input("enter the UserNAme of the employee")
-    usrpass = input("Enter the user password of employee")
+    usrnme = input("Enter the UserName of the Employee :-")
+    usrpass = input("Enter the User Password of Employee :-")
     usrtype = dsgn
-    name = input("enter the employee name")
-    gndr = input("enter the employee gender as : m or f ")
-    pho = input("enter the contact number of employee ")
-    emal = input("enter the email address of the employee")
-    status = input("enter the status of employee as : activated or deactivated")
+    name = input("Enter the Employee Name :-")
+    gndr = input("Enter the Employee Gender as : m or f :-")
+    pho = input("Enter the Contact Number of Employee :-")
+    emal = input("Enter the Email Address of the Employee :-")
+    status = input("Enter the Status of Employee as : activated or deactivated :-")
     qry = """insert into employee
              values( %s, %s, %s, %s, %s, %s, %s, %s)
           """
@@ -48,97 +49,67 @@ def createuseracc(dsgn):  # function to create employee or admin account
     cur.close()
 
 
-def viewuser():                                              # function to view all employees
-    cur = obj.cursor()
-    print("userName   userPass      userType   fullName     gender       phone            email                 status")
-    qry = "select * from employee"
-    cur.execute(qry)
-    res = cur.fetchall()
-    if cur.rowcount > 0:
-        for row in res:
-            for element in row:
-                print(element, end="       ")
-            print()
-    else:
-        print("no Record inserted in the database")
-    cur.close()
+def viewusr():                                      # function to view all employees
+    obj = pymysql.connect("localhost", "root", "", "pencore")
+    pd.set_option("display.max_row", 1000)
+    pd.set_option("display.max_column", 1000)
+    pd.set_option("display.max_colwidth", 1000)
+    pd.set_option("display.width", 1000)
+    emp = pd.read_sql_query("select* from employee", obj)
+    print(emp)
+    obj.close()
 
 
-def viewprospect():                              # function to view all prospect
-    cur = obj.cursor()
-    print("ProspId ProspName  ProspPhone ProspAddress InterestedModel InterestedColor DateOfVisit DayOfVisit  "
-          "BookingAmount Gender IncomeGroup Priority PurchaseMode")
-    qry = "select * from prospect"
-    cur.execute(qry)
-    res = cur.fetchall()
-    if cur.rowcount > 0:
-        for row in res:
-            for element in row:
-                print(element, end="   ")
-            print()
-    else:
-        print("no Record inserted in the database")
-    cur.close()
-
-
-def changepass(usrnme):                              # function to change password of user account
+def changepass(usrnme):                            # function to change password of user account
     cur = obj.cursor()
     flag = search(usrnme)
     if flag == 1:
-        passwd = input("enter the new password")
+        passwd = input("Enter the new password :-")
         qry = """update employee
                  set userPass = %s where userName = %s"""
         cur.execute(qry, (passwd, usrnme))
-        print("Password successfully Updated")
+        print("Password Successfully Updated")
         obj.commit()
         cur.close()
     else:
         print("No such Employee Exists In Database")
 
 
-def searchprospect():                      # function to search prospect record by priority or prospect id
-    cur = obj.cursor()
-    opt = int(input("""                          Press 1: To Search Prospect by Priority
+def searchprospect():                           # function to search prospect record by priority or prospect id
+    obj = pymysql.connect("localhost", "root", "", "pencore")
+    pd.set_option("display.max_row", 1000)
+    pd.set_option("display.max_column", 1000)
+    pd.set_option("display.max_colwidth", 1000)
+    pd.set_option("display.width", 1000)
+    opt = int(input("""                         
+                        Press 1: To Search Prospect by Priority
                         Press 2:  To Search Prospect by Prospect Id"""))
     if opt == 1:
         tpe = input("Enter the Prospect Priority as : low  medium high")
-        qry = """select * from prospect
-                      where priority = %s"""
-        cur.execute(qry, (tpe,))
+        prosp = pd.read_sql_query("select* from prospect", obj)
+        print(prosp[prosp.priority == tpe])
     elif opt == 2:
-        tpe = int(input("Enter THe Prospect Id"))
-        qry = """select * from prospect
-                              where prospId= %s"""
-        cur.execute(qry, (tpe,))
-    else:
-        print("Invalid Option")
-    print("ProspId ProspName  ProspPhone ProspAddress InterestedModel InterestedColor DateOfVisit DayOfVisit "
-          " BookingAmount Gender IncomeGroup Priority PurchaseMode")
-    res = cur.fetchall()
-    if cur.rowcount > 0:
-        for row in res:
-            for element in row:
-                print(element, end="   ")
-            print()
-    else:
-        print("no Record inserted in the database")
-    cur.close()
+        tpe = int(input("Enter THe Prospect Id :-"))
+        prosp = pd.read_sql_query("select* from prospect", obj)
+        print(prosp[prosp.prospId == tpe])
+    obj.close()
 
 
-def accountupdate(usrnme, stat):                                     # function to activate or deactivate record
+def accountupdate(usrnme, stat):                         # function to activate or deactivate record
     cur = obj.cursor()
     flag = search(usrnme)
     if flag == 1:
         qry = f"""update employee
-                   set status = '{stat}' where userName = '{usrnme}'"""
-        cur.execute(qry)
+                   set status = %s where userName = %s"""
+        cur.execute(qry, (stat, usrnme))
         obj.commit()
-        cur.close()
+        print("Changes Successfully Uploaded to Database")
     else:
         print("No Such Username Exists in Database")
+    cur.close()
 
 
-def search(usrnme):  # function to search record
+def search(usrnme):                                       # function to search record
     cur = obj.cursor()
     qry = "select * from employee where userName = %s"
     cur.execute(qry, (usrnme,))
@@ -151,9 +122,9 @@ def search(usrnme):  # function to search record
 
 def addmodal():
     cur = obj.cursor()
-    modid = input("Enter the model id")
-    modnme = input("Enter the model name")
-    pric = int(input("enter the model price"))
+    modid = input("Enter the Model Id:-")
+    modnme = input("Enter the Model Name:-")
+    pric = int(input("Enter the Model Price:-"))
     qry = """insert into carModels
              values(%s,%s,%s )"""
     cur.execute(qry, (modid, modnme, pric))
@@ -161,5 +132,16 @@ def addmodal():
     cur.close()
 
 
+def viewprosp():                                     # function to view all prospect
+    obj = pymysql.connect("localhost", "root", "", "pencore")
+    pd.set_option("display.max_row", 1000)
+    pd.set_option("display.max_column", 1000)
+    pd.set_option("display.max_colwidth", 1000)
+    pd.set_option("display.width", 1000)
+    prosp = pd.read_sql_query("select* from prospect", obj)
+    print(prosp)
+    obj.close()
+
+
 if __name__ == "__main__":
-    addmodal()
+    searchprospect()
