@@ -36,7 +36,7 @@ def visualization():
     elif choice == 1:
         c = 1
         for i in arr_cars.keys():
-            plt.subplot(2, 3, c)
+            plt.subplot(3, 3, c)
             for j in range(0, 1):
                 colour = ["red", "green", "blue", "brown", "yellow"]
                 random.shuffle(colour)
